@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chore Door</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet" type="text/css">
+		
+		<style type="text/css">
+
+			body {
+			  background-color: #010165;
+			  margin: 0px;
+			}
+
+			.header{
+			  background-color:#00ffff;
+			  text-align:center;
+			}
+
+			.title-row{
+			  margin-top:42px;
+			  margin-bottom:21px;
+			  text-align:center;
+			}
+
+			.instructions-title{
+			  display:inline;
+			  font-size: 18px;
+				color: #00ffff;
+				font-family: 'Work Sans';
+			}
+
+			.instructions-row{
+			  margin: 0 auto;
+				width : 400px;
+			}
+
+			.instructions-number{
+			  padding-right: 25px;
+			  font-family: 'Work Sans';
+			  font-size: 36px;
+			  color: #00ffff;
+			}
+
+			.instructions-text{
+			  padding: 10px;
+				font-family:'Work Sans';
+				font-size:14px;
+				color: #ffffff;
+			}
+
+			.door-row{
+			  text-align:center;
+			}
+
+			.door-frame{
+			  cursor: pointer;
+			  padding: 10px;
+			}
+
+			.start-row{
+			  margin:auto;
+				width:120px;
+				height:43px;
+				font-family:'Work Sans';
+				background-color:#eb6536;
+				padding-top:18px;
+				font-size:18px;
+				text-align:center;
+				color:#010165;
+				margin-bottom:21px;
+				cursor:pointer;
+			  
+			}
+
+		</style>
+
+	</head>
+
+	<body>	
+		<div class="header">
+      <img src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/logo.svg">
+    </div>
+    <div class="title-row">
+      <img src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/star.svg">
+      <p class="instructions-title">Instructions</p>
+      <img src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/star.svg">
+    </div>
+    <table class="instructions-row">
+      <tr>
+        <td class="instructions-number">1</td>
+        <td class="instructions-text">Hiding behind one of these doors is the ChoreBot.</td>
+      </tr>
+      <tr>
+        <td class="instructions-number">2</td>
+        <td class="instructions-text">Your mission is to open all of the doors without running into the ChoreBot.</td>
+      </tr>
+      <tr>
+        <td class="instructions-number">3</td>
+        <td class="instructions-text">If you manage to avoid the ChoreBot until you open the very last door, you win!</td>
+      </tr>
+      <tr>
+        <td class="instructions-number">4</td>
+        <td class="instructions-text">See if you can score a winning streak!</td>
+      </tr>
+    </table>
+    <div class="door-row">
+      <img id="door1" class="door-frame" onclick="flipDoor(0)" src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/closed_door.svg">
+      <img id="door2" class="door-frame" onclick="flipDoor(1)" src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/closed_door.svg">
+      <img id="door3" class="door-frame" onclick="flipDoor(2)" src="https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/closed_door.svg">
+    </div>
+    <div id="start" class="start-row">Good Luck!</div>
+
+	<script type="text/javascript">
+
+		// Variables
+
+		// var gameStatus = 0; // 0 is unset -> 1 is win -> 2 = lose
+
+		var doors = Array();
+		var doorContents = [
+			"https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/robot.svg",
+			"https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/beach.svg",
+			"https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/space.svg"
+		];
+
+		var botDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/robot.svg";
+		var numClosedDoors = 3;
+		var closedDoorPath = "https://s3.amazonaws.com/codecademy-content/projects/chore-door/images/closed_door.svg";
+		var startButton = document.getElementById("start");
+		var currentlyPlaying = true;
+
+
+
+		//When clicking a door run flipDoor function
+
+		function flipDoor(door){
+
+ 			// Avoid open door if game finished
+ 			if(!currentlyPlaying) return;
+
+			doors[door].src = doorContents[door];
+			numClosedDoors--;
+
+			// If all door open result = 1 => win
+			if (numClosedDoors == 0){
+				gameResult(1);
+
+			// If robot result = 2 => lose
+			} else if (doorContents[door] == botDoorPath){
+				gameResult(2);
+
+			}
+
+		}
+
+		// If not playing set up when pressing start button
+	   	startButton.onclick = function(){
+	 		if (!currentlyPlaying){
+	 			setUp();
+	 		}
+		}
+
+ 
+		
+		// Set up function
+
+		function setUp(){ 
+
+			// All doors closed
+			doors = document.getElementsByClassName('door-frame');
+			for(var i = 0; i < doors.length; i++){
+				doors[i].src = closedDoorPath;
+			}
+			numClosedDoors = doors.length;
+
+			// Shuffle images in the array
+			doorContents = shuffle(doorContents);
+		  	
+
+			startButton.innerHTML = "Good luck!";
+			currentlyPlaying = true;
+		
+		}
+
+
+ 		
+		// Handle game results
+
+		function gameResult(status){
+			currentlyPlaying = false;
+			if(status == 1){
+				startButton.innerHTML = "You win! Play again?";
+			}else{
+				startButton.innerHTML = "Game Over! Play again?";
+		
+			}
+		}
+
+
+		// Shuffle content of array 
+
+		function shuffle(a) {
+		    var j, x, i;
+		    for (i = a.length - 1; i > 0; i--) {
+
+		    	// get random number 
+		        j = Math.floor(Math.random() * (i + 1));
+		        
+		        x = a[i];
+		        a[i] = a[j];
+		        a[j] = x;
+		    }
+		    return a;
+		}
+
+		setUp();
+
+
+	</script>
+  </body>
+
+
+</html>
