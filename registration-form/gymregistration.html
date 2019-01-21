@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>Form</title>
+        <link  rel="stylesheet" type="text/css" href="gymstylesheet.css">
+	</head>
+
+	<body>
+    <div id="form-container">
+      <h1>Gym registration form</h1>
+
+      <!-- Form - First page  -->
+      <div class="form-page" id="page_0">
+        <h2>Personal details</h2>
+        <div class="line">
+          <div class="first-colum">Name</div>
+          <div class="second-colum">
+            <input type='text' name='name' placeholder='Name' class="text-button" id="name"><br>
+      	    <input type='text' name='lastname' placeholder='Lastname' class="text-button" id="lastname">
+          </div>
+        </div>
+        <div class="line">
+          <div class="first-colum">Email</div>
+          <div class="second-colum">
+            <input type='text' name='email' placeholder='ex:myname@example.com' class="text-button" id="email">
+          </div>
+        </div>
+        <div class="line">
+          <div class="first-colum">Phone number</div>
+          <div class="second-colum">
+            <input type='text' name='phonenumber' placeholder='0600000000' class="text-button" id="phone">
+          </div>
+        </div>
+        <div class="line">
+          <div class="first-colum">Address</div>
+          <div class="second-colum">
+            <input type='text' name='street' placeholder='Street,number' class="text-button" id="address"><br>
+      	    <input type='text' name='city' placeholder='City' class="text-button" id="city"><br>
+            <input type='text' name='postalcode' placeholder='Postal Code' class="text-button" id="postalCode"><br>
+            <select id="country">
+              <option value="" disabled selected>Country</option>
+        			<option value="Spain">Spain</option>
+        			<option value="Holland">Holland</option>
+        			<option value="Narnia">Narnia</option>
+        		</select>
+          </div>
+        </div>
+        <div class="line">
+          <div class="first-colum">Birth Date</div>
+          <div class="second-colum">
+            <input type='text' name='birthdate' placeholder='dd/mm/yyyy' class="text-button" id="birthdate">
+          </div>
+        </div>
+        <div class="line">
+          <div class="first-colum">How did you hear about us?</div>
+          <div class="second-colum">
+            <div class="checkbox">
+              <label for="c1"><input type='checkbox' id="c1" class="box"> A friend/colleage</label>
+            </div>
+            <div class="checkbox">
+              <label for="c2"><input type="checkbox" id="c2" class="box"> Social media</label><br>
+            </div>
+            <div class="checkbox">
+              <label for="c3"><input type="checkbox" id="c3" class="box"> Tv</label>
+            </div>
+            <div class="checkbox">
+              <label for="c4"><input type="checkbox" id="c4" class="box"> Radio</label>
+            </div>
+            <div class="checkbox">
+              <label for="c5"><input type="checkbox" id="c5" class="box"> Other</label>
+            </div>
+          </div>
+        </div>
+        <div class="submit-line">
+          <div id="invalidInputMessage"></div>
+          <div class="nav-button-container">
+            <input type="submit" value="Next!" class="next" onclick="validatePersonalDetails()"></div>
+        </div>
+      </div>
+      <!-- Second form page -->
+        <div class="form-page isHidden" id="page_1">
+          <h2>Health Background</h2>
+          <table>
+            <tr>
+              <td class="question">Do you suffer from a heart condition or have ever had any form of heart disease, previously
+suffered a heart attack, or have a family history of heart disease?</td>
+              <td class="answer">
+                Yes <input type="radio" name="heart" value="yes" id="q1-yes">
+	              No <input type="radio" name="heart" value="no" id="q1-no">
+              </td>
+            </tr>
+            <tr>
+              <td class="question">Do you experience any pain while undertaking physical activity or exercising?</td>
+              <td class="answer">
+                Yes <input type="radio" name="pain" value="yes" id="q2-yes">
+	              No <input type="radio" name="pain" value="no" id="q2-no">
+              </td>
+            </tr>
+            <tr>
+              <td class="question">Have you ever experienced faintness, dizziness, shortness of breath, or experienced a loss of
+balance while undertaking physical activity or exercise?</td>
+              <td class="answer">
+                Yes <input type="radio" name="faint" value="yes" id="q3-yes">
+	              No <input type="radio" name="faint" value="no" id="q3-no">
+              </td>
+            </tr>
+            <tr>
+              <td class="question">Do you suffer from asthma? </td>
+              <td class="answer">
+                Yes <input type="radio" name="asthma" value="yes" id="q4-yes">
+                No <input type="radio" name="asthma" value="no" id="q4-no">
+              </td>
+            </tr>
+          </table>
+          <div class="submit-line">
+            <div id="healthWarning"></div>
+            <div class="nav-button-container">
+              <input type="submit" value="Previous!" class="prev" onclick="goPreviousPage()">
+              <input type="submit" value="Next!" class="next" onclick="checkHealthBackground()">
+            </div>
+          </div>
+          </p>
+        </div>
+        <!-- Third form page -->
+        <div class="form-page isHidden" id="page_2">
+          <h2>Membership</h2>
+          <div class="option">
+            <h3>TRAIN EASY</h3>
+            <div class="option-content">€ <span class="price">219,89</span> per year</div>
+            <div class="option-content"><button type="button" name="button" onclick="goToPage(3)">I'm easy</button></div>
+            <div class="option-content"><span class="tick">&#10004; </span>Pay no entry fee!</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Get 1 month for free!</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Unlimited sporting</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Contract for 1 year, then monthly terminable</div>
+          </div>
+          <div class="option">
+            <h3>TRAIN SMART</h3>
+            <div class="option-content">€ <span class="price">19,99</span> per month</div>
+            <div class="option-content"><button type="button" name="button" onclick="goToPage(3)">I'm smart</button></div>
+            <div class="option-content"><span class="tick">&#10004; </span>Pay no entry fee!</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Pay per month</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Unlimited sporting</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Contract for 1 year, then monthly terminable</div>
+          </div>
+          <div class="option">
+            <h3>TRAIN FLEXIBLE</h3>
+            <div class="option-content">€ <span class="price">27,99</span>  per month</div>
+            <div class="option-content"><button type="button" name="button" onclick="goToPage(3)">I'm flexible</button></div>
+            <div class="option-content"><span class="tick">&#10004; </span>Unlimited sporting</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Pay per month</div>
+            <div class="option-content"><span class="tick">&#10004; </span>Flexible: Monthly terminable</div>
+            <div class="option-content"><span class="tick">&#10004; </span>One-time registration fee € 29.99</div>
+          </div>
+          <div class="nav-button-container">
+              <input type="submit" value="Previous!" class="prev" onclick="goPreviousPage()">
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="form-page isHidden" id="page_3">
+          <h4>Thanks for registering!<h4><br>
+          <h5>You will get an email with your contract details<br>Hope to see you soon!</h5>
+        </div>
+     
+    </div>
+    <script type="text/javascript" src="gymscript.js"></script>
+  </body>
+</html>

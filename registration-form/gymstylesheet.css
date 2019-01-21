@@ -1,0 +1,285 @@
+
+body{
+font-family: arial, sans-serif;
+background-image: url("gym.jpg");
+background-color: white;
+background-size: cover;
+}
+
+
+
+
+#form-container{
+  width: 70%;
+  min-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  border: 3px solid #EAEDE3;
+  border-radius: 10px;
+  position: relative;
+  top: 20px;
+  background-color: #00AD99;
+  box-shadow: 5px 5px 5px #EAEDE3;
+
+
+
+}
+
+h1{
+text-align: center;
+color: white;
+}
+
+.form-page{
+  width: 75%;
+/*  min-height: 600px;*/
+  margin: 0 auto;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #F2F3E7;
+  padding: 15px;
+
+
+}
+
+h2{
+  width: 100%;
+  padding-left: 10px;
+  margin-bottom: 40px;
+
+
+}
+.line{
+  height: auto;
+  width: 100%;
+  margin-bottom: 10px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.first-colum{
+  height: 100%;
+  width:30%;
+  min-width: 100px;
+  float: left;
+  font-size: 18px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.second-colum{
+  height: 100%;
+  width: 70%;
+  min-width: 200px;
+  float: left;
+
+}
+
+.text-button{
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-width: 200px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #00AD99;
+  border: 1px solid #00AD99;
+}
+
+
+.checkbox{
+  min-width:200px;
+
+}
+
+
+/*this is a helper class. I can add this class to any element I want to hide */
+.isHidden{
+  display: none;
+}
+
+
+select{
+  padding: 20px;
+  min-width: 250px;
+  height: 40px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 1px #00AD99;
+  border: 1px solid #00AD99;
+  background-color: white;
+}
+
+.submit-line{
+  width: 100%;
+  height: 60px;
+  padding-top: 20px;
+
+}
+
+input:focus {
+    outline:none;
+}
+
+#invalidInputMessage{
+  width: 45%;
+  height: 100%;
+  float: left;
+  color: red;
+  /*text-align: right;
+*/  padding-top: 20px;
+
+}
+
+#healthWarning{
+  width: 50%;
+  height: 100%;
+  float: left;
+  color: red;
+  /*text-align: right;*/
+  padding-top: 20px;
+}
+
+.nav-button-container{
+  height: 100%;
+  float: right;
+
+}
+input[type="submit"]{
+  height: 40px;
+  min-width: 150px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #FA6130;
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  float: left;
+
+}
+
+.next{
+  border: 1px solid #FA6130;
+  background-color:#FF9C00 ;
+
+}
+
+.prev{
+  background-color: white,
+  border: 1px solid #FA6130;
+
+}
+
+.invalidInputMessage{
+  box-shadow: 2px 2px 2px red;
+  border: 2px solid red;
+}
+
+
+tr{
+  width: 100%
+  min-height:70px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 5px;
+
+}
+
+.question{
+
+  width: 73%;
+  height: auto;
+  float: left;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.answer{
+  width: 25%;
+  height: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+
+}
+
+
+
+.option{
+  margin: 0 auto;
+  width: 30%;
+  height: 510px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 10px;
+  float:left;
+  background-color: white;
+  box-shadow: 1px 1px 1px #00AD99;
+  border: 1px solid #00AD99;
+  border-radius: 10px;
+
+
+}
+
+h3{
+  margin: 0 auto;
+  color:#FA6130;
+  align:center;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+button{
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 40px;
+  min-width: 150px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #FA6130;
+  border: 1px solid #FA6130;
+  background-color:#FF9C00 ;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
+.option-content{
+  align:center;
+  padding: 20px 10px 20px 10px;
+  box-sizing: border-box;
+  border-top: 1px solid #00AD99;
+  text-align: center;
+
+
+}
+
+.price{
+  font-size: 26px;
+}
+
+.tick{
+  color: #00AD99;
+}
+
+.clear{
+  clear: both;
+}
+
+h4{
+  font-size: 20px;
+  margin: 0 auto;
+  align:center;
+  text-align: center;
+  padding-top: 20px;
+}
+
+h5{
+  font-size: 16px;
+  margin: 0 auto;
+  align:center;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+
