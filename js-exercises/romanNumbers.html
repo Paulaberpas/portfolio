@@ -1,0 +1,23 @@
+<script>
+	function convertToRoman(num) {
+	 var romanNum = "";
+	 var key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1};
+
+	 for (var i in key){
+	 	
+		 	if (num >= key[i]){
+			     var x = Math.floor(num/key[i]);
+			   
+			     romanNum += i.repeat(x);
+			     num -= key[i] * x;
+
+			     //not necessary to clean x because it's scope is limited
+		    }
+		 
+	  }
+	 console.log(romanNum);   
+	 return romanNum;
+	}
+
+	convertToRoman(36);
+</script>

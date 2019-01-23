@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+
+      function rot13(str) { 
+
+        //initialisation variables
+        const letters = /^[A-Za-z]+$/;
+        const offset = -13;
+        const char_begin = 65;
+        const char_end = 90;
+        const range = (char_end - char_begin) + 1;
+        var finalStr = "";
+
+        for (i = 0; i < str.length; i++){
+
+          // search the string for a match with the regular expression and gives back an array
+
+          // if it's a letter translate it to charcode without the offset
+          // make sure it's in the rage
+          //translate it to string and add it to final string
+          if (str[i].match(letters)){
+
+              var charCode = str[i].charCodeAt(0)+ offset + char_begin;
+              charCode = (charCode % range) + char_begin;
+              finalStr += String.fromCharCode(charCode);
+             
+          // if it isn't a letter add it to the result
+          }else{
+              finalStr += str[i]; 
+          }
+        }
+       
+        console.log(finalStr);
+        return finalStr;
+    }
+
+    // Change the inputs below to test
+    rot13("SERR PBQR PNZC");
+
+</script>
+
+</body>
+</html>

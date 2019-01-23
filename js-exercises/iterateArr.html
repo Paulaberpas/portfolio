@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script>
+      
+      // We have defined a function, filteredArray, which takes arr, a nested array, and elem as arguments, and returns a new array. 
+
+      // elem represents an element that may or may not be present on one or more of the arrays nested within arr.
+
+      // Modify the function, using a for loop, to return a filtered version of the passed array such that any array nested within arr containing elem has been removed.
+
+      function filteredArray(arr, elem) {
+        let newArr = [];
+        
+        // loop through every element of the array arr[i]
+        for (let i = 0; i < arr.length; i++ ){
+          var elementFound = false;
+
+          // loop through the nested arrays arr[i][j]
+          // if any of the elements of the nested array is equal to elem break the loop
+          for (let j = 0; j < arr[i].length; j++ ){
+            if (arr[i][j] == elem){
+              elementFound = true;
+              break;
+            }
+          }
+
+          // if non of the elements of the nested array are found, push arr[i] to newArr
+          if (elementFound == false) {
+            newArr.push(arr[i]);
+          }
+        }
+        
+        return newArr;
+      }
+
+    // change code here to test different cases:
+    console.log(filteredArray([[3, 2, 3], [1, 6, 3], [3, 13, 26], [19, 3, 9]], 3));
+
+    
+    </script>
+  </head>
+  <body onload="javascript:run();">
+
+  </body>
+</html>
