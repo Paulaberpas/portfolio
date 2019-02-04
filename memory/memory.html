@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Memory Game</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet" type="text/css">
+		<link  rel="stylesheet" type="text/css" href="memory.css">
+
+	</head>
+
+	<body>
+		<div id="main">
+			<div id="container">
+				<h1>Choose a type of game</h1>
+
+				<div class=button_row>
+					<button onclick="selectMe(this); setGameType(1)">Best time</button>
+					<button onclick="selectMe(this); setGameType(2)">30 seconds</button>
+				</div>
+
+				<h1>Choose a board size</h1>
+				<div class=button_row>
+					<button onclick="selectMe(this); setGameSize(4)">Small</button>
+					<button onclick="selectMe(this); setGameSize(5)">Medium</button>
+					<button onclick="selectMe(this); setGameSize(6)">Big</button><br>
+				</div>
+
+				<div id="errorMessage"></div>
+
+				<button id="play" onclick="startGame();">Play!</button>
+			</div>
+			<div id="resultsContainer">
+				<div id="timer"></div>
+				<div id="counter"></div>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="memory.js"></script>
+
+		<noscript>
+			<h3>This site requires Javascript</h3>
+		</noscript>
+
+	</body>
+</html>
+
