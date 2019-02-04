@@ -60,8 +60,28 @@ function createBoard(totalCouples){
 	document.getElementById("container").style.paddingTop = 0;
 	document.getElementById("container").style.backgroundColor = "white";
 
+	// To get responsive size cards check sizes of window
+	var widthWindow = window.innerWidth;
+	var heightWindow = window.innerHeight;
+
+
+	if (widthWindow < heightWindow ){
+		var maxSizeContainer = widthWindow * 0.8;
+	}else{
+		var maxSizeContainer = heightWindow * 0.8;
+	}
+
+	// give sizes to container
+	document.getElementById("container").style.width = maxSizeContainer+"px";
+	document.getElementById("container").style.height = maxSizeContainer+"px";
+	document.getElementById("resultsContainer").style.width = maxSizeContainer+"px";
+
 	//get array of images 
 	var clickableImages = giveBackgrounds(totalCouples);
+
+	// calculate cards sizes
+	var ratio = 100/size;
+	var cardSize =  "calc(" + ratio + "% - 18px)";
 
 	// create cards, add necessary classes and id
 	for (var i = 0; i < size * size; i++){
@@ -70,21 +90,14 @@ function createBoard(totalCouples){
 		card.classList.add("card");
 		card.classList.add("closed");
 		card.id = "card_" + i;
+		card.style.height = cardSize;
+		card.style.width = cardSize;
 
 		// add onclick event to every card to be able to flip it
 		card.onclick=function() {flipcard(this)};
 		
 		// give an image from the array to the card
 		document.getElementById("card_" + i).style.backgroundImage = "url(" + clickableImages[i] +")";
-
-		// To get responsive size cards
-		var ratio = 100 / size;
-		var cardSize =  "calc(" + ratio + "% - 18px)";
-		card.style.width = cardSize;
-		// if height would be iqual to cardSize, cardSize in this case would be a % 
-		// of the height so not iqual to width and not square
-		// iqual height to width in pixels
-		$('.card').height($('#card_1').innerWidth());
 	}		
 }
 
