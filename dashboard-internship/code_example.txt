@@ -1,0 +1,186 @@
+
+  
+//... excerpt from chart view (js)
+
+// getting the data set from the back end using ajax. 
+// I was working in a framework without proper asyncronous functionality
+// so I had to use ajax to be able to refresh the graphs
+// that the user was interacting with.
+
+  function getDataSet(params){
+
+    const url = window.location.protocol+"//"+window.location.hostname+"/api/data/getDataSet";
+
+    $.ajax({url: url, method: "POST", data: params, success: function(result){
+      var chartData = result['data'];
+      var i = chartData['id']; 
+      i = i.split("_")[1];
+      chartDefaults[i] = chartData;
+      renderChart(chartData);
+    }});
+  }
+
+  // handles the common functionalities for creating a new chart
+  // avoiding repeating code
+
+  function renderChart(chartData){
+    var id = chartData['id']; 
+
+    var type = chartData['type'];
+
+    var series = chartData['dataPoints'];
+
+    renderPagination(chartData);
+
+    var graphData = new Object();
+    graphData.series = series;
+    graphData.labels = chartData['labels'];
+    
+    if (chartData['type']== 'line'){
+      createLineChart(id,chartData,graphData);
+    }else if(chartData['type']== 'bar'){
+      createBarChart(id,chartData,graphData);
+    }else if (chartData['type']== 'pie'){
+      createPieChart(id,chartData,graphData);
+    }
+    
+    document.getElementById('subtitle_'+id).innerHTML= chartData['subtitle'];
+  }
+
+
+  // example of chart type
+  // setting the specific properties for the line chart
+  // I used chartist.js for rendering the charts in colaboration with the designer
+
+  function createLineChart(id,chartData,graphData){
+    var options = new Object();
+    options.fullWidth = true;
+    options.showPoint = true;
+    options.axisY= {
+      offset: 50
+    };
+    options.axisX= {
+      offset: 50
+    };
+    if(chartData.hasOwnProperty('legend')){
+        var legend = chartData['legend'];
+        var chartId = id.split('_')[1];
+        var divId = 'legend_container_' + chartId;
+        var pos = document.getElementById(divId);
+        pos.innerHTML="";
+        options.plugins = [
+          Chartist.plugins.tooltip({
+            anchorToPoint: true
+          }),
+          Chartist.plugins.legend({
+                  legendNames: legend,
+                  position: pos
+                  }) 
+        ];
+    }else{
+        options.plugins = [
+          Chartist.plugins.tooltip({
+            anchorToPoint: true
+          })
+        ];
+    }
+    new Chartist.Line(id, graphData, options);
+  }
+
+  // end of excerpt from chart view
+
+
+
+
+
+  // excerpt from chart data api  (php)
+
+
+  // there was no proper api set up 
+  // all calls were routed to this public function
+  // to ensure authentication
+  // calls are passed through to specific functions by name and results were
+  // given as a json object
+
+  public function getDataSet(){
+        if(!c_data::isAuth()) $this->returnJSON(false, 'Authentication failure');
+        
+        if(!isset($_POST['function']) || ($function_name=$_POST['function'])===NULL) {
+            $this->returnJSON(false, 'No function name given');
+        }
+       
+        $result = $this->$function_name($_POST);
+        $this->returnJSON(true, 'Request completed', $result);   
+    }
+
+
+    // this function gets the data from the model and prepares the data object
+
+    private function getVersionDistr($parameters){
+        $result = $parameters;
+        $online = $parameters['options']['Online']['selected'];
+        $locale = $parameters['options']['Countries']['selected'];
+
+        $versionDistrArray = m_unit::getVersionDistr($locale);
+        $dataPoints = array();
+        $labels = array();
+        
+        foreach ($versionDistrArray as $label => $dataPoint) {
+            if ($online == "yes"){
+                array_push($dataPoints, $dataPoint);
+                array_push($labels, $label);
+            }else{
+                if ($label != "Unknown" ){
+                    array_push($dataPoints, $dataPoint);
+                    array_push($labels, $label);
+                }
+            }
+        }  
+
+        $result['dataPoints'][0] = $dataPoints;
+        $result['labels'] = $labels;
+        return $result;
+    }
+
+  // end of excerpt from chart data endpoint
+
+
+
+
+
+  // excerpt from unit model
+
+
+  // here the data is retrieved from the mysql database with PDO
+  // most data manipulation is done in the model so that clean data
+  // is returned to the controller
+
+  public static function getSoftwareVersionDistr($locale){
+    if($locale == -1){
+      $locale="%%";
+    }
+
+    $softwareVersionArr = parent::db()->query(
+      "SELECT `software_version` FROM `unit` \
+      WHERE `locale_id` LIKE '$locale' \
+      ORDER BY `software_version` ASC \
+    ")->fetchAll();
+
+    $versionDistrArray = array();
+
+    foreach ($softwareVersionArr as $softwareVersion) {
+      $softwareVersion=$softwareVersion['software_version'];
+      if($softwareVersion==""){
+        $softwareVersion="Unknown";
+      } 
+
+      if(isset($versionDistrArray[$softwareVersion])){
+        $versionDistrArray[$softwareVersion]++;
+      } else {
+        $versionDistrArray[$softwareVersion]=1;
+      }
+    }
+    return $versionDistrArray;
+  }
+
+// end of excerpt from unit model
